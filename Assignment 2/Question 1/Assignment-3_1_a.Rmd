@@ -1,0 +1,48 @@
+---
+title: "Assignment-3_1_a"
+author: "Chinmaya Bansal"
+date: "25 September 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r read testing and training data, echo=FALSE}
+dat = read.table("RegD1.txt", header=TRUE)
+
+test_d=dat[seq(0,nrow(dat),10),]
+names(train_d)=c("yval","xval1","xval2")
+train_d=dat[-seq(0,nrow(dat),10),]
+
+```
+
+
+```{r plot of training data, echo=FALSE}
+plot(train_d,gap=0)
+```
+
+Sumaary of Linear Regression of Training Data
+```{r linear regression,echo=FALSE}
+lr = lm(Y1~X1+X2,train_d)
+
+summary(lr,corr= TRUE)
+
+```
+Fitted Value and Residuals (Between predicted value and the original training data)
+```{r data frame, echo=FALSE}
+data.frame(train_d,fitted.value=fitted(lr),residuals=resid(lr))
+```
+Analysis of Variance
+Total Sample Variability = Variability explained by model + Unexplained Variability
+```{r Analysis of Variance, echo=FALSE}
+anova(lr)
+```
+Confidence and Prediction bands
+```{r Confidence and Prediction bands, echo=FALSE}
+predict(lr,interval = "confidence")
+predict(lr,interval = "prediction")
+```
+
