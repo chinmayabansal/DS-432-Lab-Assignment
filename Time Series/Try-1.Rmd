@@ -1,0 +1,30 @@
+---
+title: "Time Series"
+author: "Chinmaya Bansal"
+date: "29 October 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r initalize, echo=FALSE}
+library('ggplot2')
+library('forecast')
+library('tseries')
+
+
+ddata = read.csv('TSD1.txt', header=TRUE, stringsAsFactors=FALSE)
+head(ddata)
+```
+
+```{r examining, echo=FALSE}
+ggplot(ddata,aes(ddata$x,ddata)) + geom_line() + scale_x_date('month')  + ylab("Daily Bike Checkouts") + xlab("")
+```
+
+
+
+
+
